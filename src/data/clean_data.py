@@ -1,8 +1,6 @@
 import pandas as pd
 import click
 
-RAW_DATA_PATH = "data/raw/all_data.csv"
-CLEANED_DATA_PATH = "data/interim/data_cleaned.csv"
 
 @click.command()
 @click.argument('input_path', type=click.Path(exists=True))
@@ -30,7 +28,9 @@ def clean_data(input_path: str, output_path: str):
     else:
         df[i] = df[i].apply(lambda x: x if x < up_limit else df[i].median())
 
-    df.to_csv(output_path)
+    df = df.dropna()
+    df = df.drop_duplicates()
+    df.to_csv(output_path, index=False)
 
 if __name__ == "__main__":
     clean_data()
