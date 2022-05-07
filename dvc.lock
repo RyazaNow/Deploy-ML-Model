@@ -1,0 +1,75 @@
+schema: '2.0'
+stages:
+  clean_data:
+    cmd: python src/data/clean_data.py data/raw/all_data.csv data/interim/data_cleaned.csv
+    deps:
+    - path: data/raw/all_data.csv
+      md5: 5b62277e1aa16047d8a2fb0bfbaaced3
+      size: 1407003
+    - path: src/data/clean_data.py
+      md5: 2532d355d8663508a9437db5c4b4c134
+      size: 983
+    outs:
+    - path: data/interim/data_cleaned.csv
+      md5: 03aeb30bf7d884b294ad872c8ea603d5
+      size: 925637
+  add_features:
+    cmd: python src/features/add_features.py data/interim/data_cleaned.csv data/interim/data_featured.csv
+    deps:
+    - path: data/interim/data_cleaned.csv
+      md5: 03aeb30bf7d884b294ad872c8ea603d5
+      size: 925637
+    - path: src/features/add_features.py
+      md5: 5e584f2597a401c28f33e579aaf7463d
+      size: 752
+    outs:
+    - path: data/interim/data_featured.csv
+      md5: 54bf399fee0eb4365175dd06d5d79040
+      size: 778322
+  prepare_datasets:
+    cmd: python src/models/prepare_datasets.py data/interim/data_featured.csv data/processed/train.csv
+      data/processed/test.csv
+    deps:
+    - path: data/interim/data_featured.csv
+      md5: 54bf399fee0eb4365175dd06d5d79040
+      size: 778322
+    - path: src/models/prepare_datasets.py
+      md5: 7ebb3d5889938e1673698e5142ec5210
+      size: 570
+    outs:
+    - path: data/processed/test.csv
+      md5: 0441555322c404c7690c02ef739b8b24
+      size: 196177
+    - path: data/processed/train.csv
+      md5: 2b69533831d789e5e977f57173bff963
+      size: 584396
+  train:
+    cmd: python src/models/train.py data/processed/train.csv data/processed/test.csv
+      models/model.clf
+    deps:
+    - path: data/processed/test.csv
+      md5: 0441555322c404c7690c02ef739b8b24
+      size: 196177
+    - path: data/processed/train.csv
+      md5: 2b69533831d789e5e977f57173bff963
+      size: 584396
+    - path: src/models/train.py
+      md5: 4a3faf84fa9322446839876d8d58082a
+      size: 1523
+    outs:
+    - path: models/model.clf
+      md5: 7704c9ceac17f226d8a3a99ed1c8ce8c
+      size: 1012920
+  evaluate:
+    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/scores.csv
+    deps:
+    - path: models/model.clf
+      md5: 7704c9ceac17f226d8a3a99ed1c8ce8c
+      size: 1012920
+    - path: src/models/evaluate.py
+      md5: f6b7d110527027dcd4349c22a15b0e27
+      size: 1012
+    outs:
+    - path: reports/scores.csv
+      md5: 273b26c782fbcbe3d1fb014dcd54fa79
+      size: 77

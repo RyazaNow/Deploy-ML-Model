@@ -1,0 +1,43 @@
+stages:
+
+  clean_data:
+    cmd: python src/data/clean_data.py data/raw/all_data.csv data/interim/data_cleaned.csv
+    deps:
+      - data/raw/all_data.csv
+      - src/data/clean_data.py
+    outs:
+      - data/interim/data_cleaned.csv
+
+  add_features:
+    cmd: python src/features/add_features.py data/interim/data_cleaned.csv data/interim/data_featured.csv
+    deps:
+      - data/interim/data_cleaned.csv
+      - src/features/add_features.py
+    outs:
+      - data/interim/data_featured.csv
+
+  prepare_datasets:
+    cmd: python src/models/prepare_datasets.py data/interim/data_featured.csv data/processed/train.csv data/processed/test.csv
+    deps:
+      - data/interim/data_featured.csv
+      - src/models/prepare_datasets.py
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+  train:
+    cmd: python src/models/train.py data/processed/train.csv data/processed/test.csv models/model.clf
+    deps:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - src/models/train.py
+    outs:
+      - models/model.clf
+
+  evaluate:
+    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/scores.csv
+    deps:
+      - src/models/evaluate.py
+      - models/model.clf
+    outs:
+      - reports/scores.csv
