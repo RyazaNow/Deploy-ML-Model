@@ -14,7 +14,6 @@ def train(input_paths: List[str], output_path: str):
     train_df = pd.read_csv(input_paths[0])
     test_df = pd.read_csv(input_paths[1])
 
-    cat_features_names = list(train_df.select_dtypes('object').columns)
     X = list(train_df.drop(['Оператор'], axis=1).columns)
     cat_features_names = list(train_df[X].select_dtypes('object').columns)
 
