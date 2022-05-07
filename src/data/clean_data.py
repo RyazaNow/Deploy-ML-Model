@@ -4,7 +4,7 @@ import click
 
 @click.command()
 @click.argument('input_path', type=click.Path(exists=True))
-@click.argument('output_path', type=click.Path(exists=True))
+@click.argument('output_path', type=click.Path())
 def clean_data(input_path: str, output_path: str):
     '''
     :param input_path:
