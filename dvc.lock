@@ -67,9 +67,9 @@ stages:
       md5: 7704c9ceac17f226d8a3a99ed1c8ce8c
       size: 1012920
     - path: src/models/evaluate.py
-      md5: f6b7d110527027dcd4349c22a15b0e27
-      size: 1012
+      md5: 20819d13323f9e396cfeda4b2af7d5bd
+      size: 938
     outs:
     - path: reports/scores.csv
-      md5: 273b26c782fbcbe3d1fb014dcd54fa79
-      size: 77
+      md5: aa1f1d4eeb81ae4d4f483c9959f72953
+      size: 85

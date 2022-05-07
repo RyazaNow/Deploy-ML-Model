@@ -19,10 +19,9 @@ def evaluate(input_paths: List[str], output_path: str):
     pred = model.predict(x_holdout)
 
     accuracy_score(y_holdout, pred)
-    index = ['Accuracy', 'F1_Score', 'AUC_ROC']
-    score = pd.DataFrame({'Оператор':[accuracy_score(y_holdout, pred),
-                                      f1_score(y_holdout, pred),
-                                      roc_auc_score(y_holdout, pred)]}, index=index)
+    score = pd.DataFrame({'accuracy':[accuracy_score(y_holdout, pred)],
+                        'f1_score:':[f1_score(y_holdout, pred)],
+                        'roc_auc':[roc_auc_score(y_holdout, pred)]})
 
     score.to_csv(output_path, index=False)
 
