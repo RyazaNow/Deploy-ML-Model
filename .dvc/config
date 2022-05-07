@@ -1,8 +1,0 @@
-[core]
-    remote = myremote
-    autostage = true
-['remote "myremote"']
-    url = s3://deployml
-    endpointurl = https://storage.yandexcloud.net
-    access_key_id = YCAJEHRsYlGEajZtn2w5_UKf4
-    secret_access_key = YCPzvewHRMCQ-951Wvwu14VOcn-4hxTonobDeUxn
