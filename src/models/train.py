@@ -5,8 +5,12 @@ from catboost import Pool, CatBoostClassifier
 from typing import List
 from sklearn.metrics import mean_absolute_error, mean_squared_error, accuracy_score, f1_score, roc_auc_score
 import mlflow
+import os
 
-#mlflow.catboost.log_model(cb_model=CatBoostClassifier, artifact_path='models/model1.clf')
+os.environ['MLFLOW_TRACKING_USERNAME'] = "RyazaNow"
+os.environ['MLFLOW_TRACKING_PASSWORD'] = "abfac14e692ddb7ac8d2ed69487440f035bd0aa7"
+
+mlflow.set_tracking_uri('https://dagshub.com/RyazaNow/Deploy-ML-Model.mlflow')
 mlflow.set_experiment('catboost')
 
 @click.command()
