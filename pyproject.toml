@@ -9,6 +9,7 @@ python = "^3.9"
 pandas = "^1.4.2"
 snakemake = "^7.6.1"
 dvc = "^2.10.2"
+mlflow = "^1.25.1"
 
 [tool.poetry.dev-dependencies]
 

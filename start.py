@@ -1,4 +1,5 @@
 import src
+from mlflow import log_metrics
 
 RAW_DATA_PATH = 'data/raw/all_data.csv'
 CLEANED_DATA_PATH = 'data/interim/data_cleaned.csv'

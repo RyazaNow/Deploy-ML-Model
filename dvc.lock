@@ -54,22 +54,22 @@ stages:
       md5: 2b69533831d789e5e977f57173bff963
       size: 584396
     - path: src/models/train.py
-      md5: 4a3faf84fa9322446839876d8d58082a
-      size: 1523
+      md5: 870d7db71975b026613684759c693f79
+      size: 2314
     outs:
     - path: models/model.clf
-      md5: 7704c9ceac17f226d8a3a99ed1c8ce8c
-      size: 1012920
+      md5: 2d0e14d161aa17a4fd9c3f5358a23782
+      size: 1012911
   evaluate:
-    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/scores.csv
+    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/metrics.json
     deps:
     - path: models/model.clf
-      md5: 7704c9ceac17f226d8a3a99ed1c8ce8c
-      size: 1012920
+      md5: 2d0e14d161aa17a4fd9c3f5358a23782
+      size: 1012911
     - path: src/models/evaluate.py
-      md5: 20819d13323f9e396cfeda4b2af7d5bd
-      size: 938
+      md5: 75ef21ccbc2eadd9a258c174819088f6
+      size: 988
     outs:
-    - path: reports/scores.csv
-      md5: aa1f1d4eeb81ae4d4f483c9959f72953
-      size: 85
+    - path: reports/metrics.json
+      md5: 35c73dc14e2a4f85653480fea2576565
+      size: 113

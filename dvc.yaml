@@ -35,9 +35,9 @@ stages:
       - models/model.clf
 
   evaluate:
-    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/scores.csv
+    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/metrics.json
     deps:
       - src/models/evaluate.py
       - models/model.clf
-    outs:
-      - reports/scores.csv
+    metrics:
+      - reports/metrics.json

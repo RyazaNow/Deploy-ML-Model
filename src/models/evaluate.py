@@ -3,7 +3,7 @@ import pandas as pd
 import joblib as jb
 from typing import List
 from sklearn.metrics import accuracy_score, confusion_matrix,  roc_auc_score, f1_score
-
+import json
 
 @click.command()
 @click.argument("input_paths", type=click.Path(exists=True), nargs=2)
@@ -19,11 +19,14 @@ def evaluate(input_paths: List[str], output_path: str):
     pred = model.predict(x_holdout)
 
     accuracy_score(y_holdout, pred)
-    score = pd.DataFrame({'accuracy':[accuracy_score(y_holdout, pred)],
-                        'f1_score:':[f1_score(y_holdout, pred)],
-                        'roc_auc':[roc_auc_score(y_holdout, pred)]})
+    score = dict(
+            accuracy=accuracy_score(y_holdout, pred),
+            f1_scrore=f1_score(y_holdout, pred),
+            roc_auc=roc_auc_score(y_holdout, pred)
+                 )
 
-    score.to_csv(output_path, index=False)
+    with open(output_path, "w") as score_file:
+        json.dump(score, score_file, indent=4)
 
 
 
